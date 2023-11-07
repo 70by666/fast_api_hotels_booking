@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     DB_NAME_TEST: str
 
     class Config:
-        env_file = '../.env'
+        env_file = '.env'
 
 
 settings = Settings()
