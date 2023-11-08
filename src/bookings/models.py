@@ -3,8 +3,8 @@ from sqlalchemy import Column, Integer, ForeignKey, Date, Computed
 from src.database import Base
 
 
-class Bookin(Base):
-    __tablename__ = 'bookin'
+class Booking(Base):
+    __tablename__ = 'booking'
 
     id = Column(Integer, primary_key=True)
     room_id = Column(Integer, ForeignKey('room.id'))
