@@ -32,3 +32,8 @@ class InvalidTokenException(HotelsException):
 class TokenExpiredException(HotelsException):
     status_code = status.HTTP_401_UNAUTHORIZED
     detail = 'Токен истек'
+
+
+class RoomCannotBeBookedException(HotelsException):
+    status_code = status.HTTP_409_CONFLICT
+    detail = 'Не осталось свободных номеров'
