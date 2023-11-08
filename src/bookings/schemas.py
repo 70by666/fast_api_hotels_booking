@@ -1,6 +1,7 @@
 from datetime import date
+from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class SBooking(BaseModel):
@@ -12,3 +13,9 @@ class SBooking(BaseModel):
     price: int
     total_days: int
     total_cost: int
+
+
+class SBookingResponse(BaseModel):
+    status: str
+    data: list[SBooking]
+    details: Optional[str]

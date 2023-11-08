@@ -1,8 +1,6 @@
-from typing import Optional
-
 from fastapi import APIRouter
 
-from src.bookings.schemas import SBooking
+from src.bookings.schemas import SBookingResponse
 from src.bookings.service import BookingService
 
 router = APIRouter(
@@ -12,5 +10,9 @@ router = APIRouter(
 
 
 @router.get('')
-async def get_bookings() -> list[SBooking]:
-    return await BookingService.find_all()
+async def get_bookings() -> SBookingResponse:
+    return {
+        'status': 'success',
+        'data': await BookingService.find_all(),
+        'details': None,
+    }
