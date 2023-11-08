@@ -39,7 +39,7 @@ async def create_user(email: EmailStr, password: str):
         is_verified=False,
         created_at=datetime.utcnow(),
     )
-    return True
+    return existing_user
 
 
 async def auth_user(email: EmailStr, password: str):
