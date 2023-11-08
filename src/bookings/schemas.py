@@ -1,7 +1,7 @@
 from datetime import date
 from typing import Optional
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
 
 
 class SBooking(BaseModel):
@@ -15,7 +15,7 @@ class SBooking(BaseModel):
     total_cost: int
 
 
-class SBookingResponse(BaseModel):
+class SBookingResult(BaseModel):
     status: str
     data: list[SBooking]
     details: Optional[str]
