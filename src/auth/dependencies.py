@@ -3,7 +3,7 @@ from datetime import datetime
 from fastapi import Request, HTTPException, status, Depends
 from jose import jwt, JWTError
 
-from exceptions import InvalidTokenException, TokenDoesNotExistException, TokenExpiredException
+from src.exceptions import InvalidTokenException, TokenDoesNotExistException, TokenExpiredException
 from src.auth.models import User
 from src.auth.service import UserService
 from src.config import settings

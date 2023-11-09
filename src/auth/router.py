@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Response, Depends
 
-from exceptions import UserAlreadyExistsException, IncorrectEmailOrPasswordException
+from src.exceptions import UserAlreadyExistsException, IncorrectEmailOrPasswordException
 from src.auth.auth import auth_user, create_access_token, create_user
 from src.auth.dependencies import get_current_user, get_current_superuser
 from src.auth.models import User
