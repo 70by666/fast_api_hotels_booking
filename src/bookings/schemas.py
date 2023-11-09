@@ -25,3 +25,9 @@ class SBookingResultAdd(BaseModel):
     status: str
     data: SBooking
     details: Optional[str]
+
+
+class SBookingDelete(BaseModel):
+    status: str
+    data: Optional[str]
+    details: str
