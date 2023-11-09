@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, DateTime, Boolean, String
+from sqlalchemy.orm import relationship
 
 from src.database import Base
 
@@ -13,3 +14,6 @@ class User(Base):
     is_superuser = Column(Boolean, nullable=False)
     is_verified = Column(Boolean, nullable=False)
     created_at = Column(DateTime, nullable=False)
+
+    def __str__(self):
+        return f'Пользователь {self.email}'

@@ -67,7 +67,7 @@ class BookingService(BaseService):
     @classmethod
     async def delete_booking_by_id(cls, booking_id, user_id):
         async with async_session_maker() as session:
-            booking = await cls.find_by_id(booking_id)
+            booking = await cls.find_one_or_none(id=booking_id)
             if not booking:
                 return None
             if not booking.user_id == user_id:
