@@ -28,8 +28,9 @@ def create_access_token(data: dict) -> str:
 
 async def create_user(email: EmailStr, password: str):
     existing_user = await UserService.find_one_or_none(email=email)
+    print(existing_user, '1')
     if existing_user:
-        return None
+        return existing_user
     hashed_password = get_password_hash(password)
     await UserService.add(
         email=email,
@@ -39,7 +40,8 @@ async def create_user(email: EmailStr, password: str):
         is_verified=False,
         created_at=datetime.utcnow(),
     )
-    return existing_user
+    print(existing_user, '2')
+    return None
 
 
 async def auth_user(email: EmailStr, password: str):

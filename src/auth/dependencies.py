@@ -27,7 +27,7 @@ async def get_current_user(access_token: str = Depends(get_token)):
     user_id = payload.get('sub')
     if not user_id:
         raise InvalidTokenException()
-    user = await UserService.find_by_id(int(user_id))
+    user = await UserService.find_user_by_id(int(user_id))
     if not user:
         raise InvalidTokenException()
 

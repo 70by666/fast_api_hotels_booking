@@ -19,3 +19,9 @@ class SBookingResult(BaseModel):
     status: str
     data: list[SBooking]
     details: Optional[str]
+
+
+class SBookingResultAdd(BaseModel):
+    status: str
+    data: SBooking
+    details: Optional[str]
