@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for i in hotels %}
+        <div>
+            <h1> {{ i.name }} </h1>
+            <h4> {{ i.location }} </h4>
+        </div>
+    {% endfor %}
+{% endblock %}
