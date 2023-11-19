@@ -2,9 +2,12 @@
 
 {% block content %}
     {% for i in hotels %}
-        <div>
-            <h1> {{ i.name }} </h1>
-            <h4> {{ i.location }} </h4>
+        <div style="display: flex; margin-bottom: 10px; margin-left: 500px;">
+            <img src="{{ url_for('static', path='images/' + i.image_id|string + '.webp') }}" alt="фото" width="300">
+            <div style="margin-left: 10px;">
+                <h1> {{ i.name }} </h1>
+                <h4> {{ i.location }} </h4>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}
