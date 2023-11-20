@@ -6,6 +6,7 @@ from fastapi import UploadFile, APIRouter
 
 from src.images.schemas import SUploadHotels
 from src.images.utils import set_name
+from src.tasks.tasks import process_pic
 
 router = APIRouter(
     prefix='/images',
@@ -16,8 +17,10 @@ router = APIRouter(
 @router.post('/hotels', status_code=201)
 async def add_hotel_image(name: int, file: UploadFile) -> SUploadHotels:
     name = set_name(name)
-    with open(f'src/static/images/{name}.webp', 'wb+') as f:
+    path = f'src/static/images/{name}.webp'
+    with open(path, 'wb+') as f:
         shutil.copyfileobj(file.file, f)
+    process_pic.delay(path)
     # noinspection PyTypeChecker
     return {
         'status': 'success',

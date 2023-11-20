@@ -1,7 +1,8 @@
-from datetime import date
+from datetime import date, datetime, timedelta
 from typing import List, Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
+from fastapi_cache.decorator import cache
 
 from src.exceptions import DateFromCannotBeAfterDateToException, CannotBookHotelForLongPeriodException
 from src.hotels.service import HotelService
@@ -14,10 +15,11 @@ router = APIRouter(
 
 
 @router.get("/{location}")
+@cache(expire=30)
 async def get_hotels_by_location_and_time(
     location: str,
-    date_from: date,
-    date_to: date,
+    date_from: date = Query(..., description=f"Например, {datetime.now().date()}"),
+    date_to: date = Query(..., description=f"Например, {(datetime.now() + timedelta(days=14)).date()}"),
 ) -> List[SHotelInfo]:
     if date_from > date_to:
         raise DateFromCannotBeAfterDateToException()

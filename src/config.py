@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     SECRET_AUTH: str
     ALGORITHM: str
 
+    REDIS: str
+
     class Config:
         env_file = '.env'
 
