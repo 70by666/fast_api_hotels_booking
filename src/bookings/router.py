@@ -1,12 +1,15 @@
 from datetime import date
 
 from fastapi import APIRouter, Depends
+from pydantic import parse_obj_as, TypeAdapter
 
 from src.exceptions import RoomCannotBeBookedException
 from src.auth.dependencies import get_current_user
-from src.bookings.schemas import SBookingResult, SBookingResultAdd, SBookingDelete
+from src.bookings.schemas import SBookingResult, SBookingResultAdd, SBookingDelete, SBooking
 from src.bookings.service import BookingService
 from src.auth.models import User
+from src.tasks._email import create_booking_message
+from src.tasks.tasks import send_booking_email
 
 router = APIRouter(
     prefix='/bookings',
@@ -32,6 +35,9 @@ async def add_booking(
     current_user: User = Depends(get_current_user),
 ) -> SBookingResultAdd:
     booking = await BookingService.add(current_user.id, room_id, date_from, date_to)
+    ta = TypeAdapter(SBooking)
+    booking_dict = ta.dump_python(booking)
+    send_booking_email.delay(booking_dict, current_user.email)
     if not booking:
         raise RoomCannotBeBookedException()
     # noinspection PyTypeChecker

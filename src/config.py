@@ -15,6 +15,11 @@ class Settings(BaseSettings):
 
     REDIS: str
 
+    SMTP_HOST: str
+    SMTP_PORT: str
+    SMTP_USER: str
+    SMTP_PASS: str
+
     class Config:
         env_file = '.env'
 
